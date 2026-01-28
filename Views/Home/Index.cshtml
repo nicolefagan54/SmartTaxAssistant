@@ -1,0 +1,117 @@
+﻿@model IEnumerable<SmartTaxAssistant.Web.Models.QuestionnaireQuestion>
+
+@{
+    ViewData["Title"] = "Home Page";
+    // Safety check in case Model is null (though controller should provide it)
+    var questions = Model ?? new List<SmartTaxAssistant.Web.Models.QuestionnaireQuestion>();
+    var personalQuestions = questions.Where(q => q.ReturnType == "Personal");
+    var corpQuestions = questions.Where(q => q.ReturnType == "Corporate");
+}
+
+<div class="text-center mb-4">
+    <h1 class="display-4">SmartTaxAssistant</h1>
+    <h3 class="text-muted">Ontario Tax Act Compliant</h3>
+    <p class="lead">Upload your return and answer the questionnaire below.</p>
+</div>
+
+<form enctype="multipart/form-data" method="post" asp-controller="Home" asp-action="Index">
+    <div class="row">
+        <!-- Return Details Column -->
+        <div class="col-md-5">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">1. Return Details</h5>
+                </div>
+                <div class="card-body text-start">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Return Type</label>
+                        <select name="returnType" id="returnTypeSelect" class="form-select" onchange="toggleQuestions()">
+                            <option value="Personal">Personal (T1)</option>
+                            <option value="Corporate">Corporate (T2)</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Tax Year</label>
+                        <input type="number" name="taxYear" class="form-control" value="@DateTime.Now.Year" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Tax Document (PDF)</label>
+                        <input type="file" name="pdf" class="form-control" required />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Questionnaire Column -->
+        <div class="col-md-7">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">2. Questionnaire</h5>
+                </div>
+                <div class="card-body text-start">
+                    
+                    @if (!questions.Any())
+                    {
+                        <div class="alert alert-warning">
+                             No questions loaded. Please check database seeding.
+                        </div>
+                    }
+
+                    <!-- Personal Questions -->
+                    <div id="personalQuestions">
+                        <h6 class="text-primary border-bottom pb-2 mb-3">Personal Questions (T1)</h6>
+                        @foreach (var q in personalQuestions)
+                        {
+                            <div class="mb-3">
+                                <label class="form-label small mb-1">@q.Text</label>
+                                <select name="answers[@q.QuestionnaireQuestionId]" class="form-select form-select-sm">
+                                    <option value="">-- Select --</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+                        }
+                    </div>
+
+                    <!-- Corporate Questions -->
+                    <div id="corpQuestions" style="display:none;">
+                        <h6 class="text-success border-bottom pb-2 mb-3">Corporate Questions (T2)</h6>
+                        @foreach (var q in corpQuestions)
+                        {
+                            <div class="mb-3">
+                                <label class="form-label small mb-1">@q.Text</label>
+                                <select name="answers[@q.QuestionnaireQuestionId]" class="form-select form-select-sm">
+                                    <option value="">-- Select --</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-grid gap-2 col-md-6 mx-auto">
+        <button type="submit" class="btn btn-success btn-lg">Submit Return</button>
+    </div>
+</form>
+
+<script>
+    function toggleQuestions() {
+        var type = document.getElementById("returnTypeSelect").value;
+        if (type === "Personal") {
+            document.getElementById("personalQuestions").style.display = "block";
+            document.getElementById("corpQuestions").style.display = "none";
+        } else {
+            document.getElementById("personalQuestions").style.display = "none";
+            document.getElementById("corpQuestions").style.display = "block";
+        }
+    }
+    // Initialize state on load
+    document.addEventListener("DOMContentLoaded", function() {
+        toggleQuestions();
+    });
+</script>

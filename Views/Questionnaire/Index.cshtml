@@ -1,0 +1,28 @@
+@model IEnumerable<SmartTaxAssistant.Web.Models.QuestionnaireQuestion>
+
+@{
+    ViewData["Title"] = "Questionnaire";
+}
+
+<h2>Tax Questionnaire</h2>
+
+@if (Model != null && Model.Any())
+{
+<form asp-action="Start" asp-route-id="@ViewBag.TaxReturnId" method="post">
+        @foreach (var question in Model)
+        {
+            <div class="form-group mb-3">
+                <label class="form-label">@question.Text</label>
+                <input type="text" name="answers[@question.QuestionnaireQuestionId]" class="form-control" />
+            </div>
+        }
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+}
+else
+{
+    <div class="alert alert-info">
+        <p>No questions found for this return type. This might be a database seeding issue.</p>
+        <p>Return Type: @ViewBag.ReturnType</p> 
+    </div>
+}

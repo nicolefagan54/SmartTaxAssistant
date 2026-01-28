@@ -1,0 +1,11 @@
+bin/
+obj/
+.vscode/
+.vs/
+*.user
+*.pdb
+*.suo
+*.jfm
+*.iks
+*.deploy
+appsettings.Development.json

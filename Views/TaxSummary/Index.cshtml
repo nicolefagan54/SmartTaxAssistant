@@ -1,0 +1,29 @@
+@model IEnumerable<SmartTaxAssistant.Web.Models.ExtractedLineItem>
+
+@{
+    ViewData["Title"] = "Tax Summary";
+}
+
+<h2>Tax Summary</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.RawText</td>
+                <td>@item.Amount?.ToString("C")</td>
+                <td>@item.TaxCategoryId</td> 
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-controller="Home" asp-action="Index" class="btn btn-primary">Back to Home</a>tax details will appear here.</p>
