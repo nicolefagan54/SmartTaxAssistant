@@ -105,3 +105,41 @@ SmartTaxAssistant.Web/
 ├── appsettings.json
 └── Program.cs
 ```
+
+## ⚙️ How to Run the Project
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/nicolefagan54/SmartTaxAssistant.git
+   ```
+
+2. **Navigate to the web project:**
+   ```bash
+   cd SmartTaxAssistant.Web
+   ```
+
+3. **Run the application:**
+   ```bash
+   dotnet run
+   ```
+   > **Note**: The application will automatically apply database migrations on startup.
+
+4. **Open your browser** to `http://localhost:5039`.
+
+---
+
+## 📌 Future Enhancements
+
+- Add user authentication
+- Add PDF export of tax summary
+- Add dashboard for reviewing completed entries
+- Add CRA‑specific modules
+- Add multi‑province support
+
+---
+
+## 👩‍💻 Author
+
+**Nicole Fagan**  
+Junior Software Developer  
+GitHub: [nicolefagan54](https://github.com/nicolefagan54)
