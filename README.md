@@ -129,5 +129,10 @@ SmartTaxAssistant.Web/
 ## 👩‍💻 Author
 
 **Nicole Fagan**  
-Junior Software Developer  
 GitHub: [nicolefagan54](https://github.com/nicolefagan54)
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
