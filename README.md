@@ -11,23 +11,11 @@ It guides users through structured tax‑related questions and stores their resp
 
 ---
 
-## 📸 Screenshots
+## 📸 Application Preview
 
-### **Home Page**
+![Application Preview](docs/screenshots/preview.png)
 
-![Home Page](docs/screenshots/homepage.png)
-
-### **Tax Questionnaire**
-
-![Questionnaire](docs/screenshots/questionnaire.png)
-
-### **Summary Page**
-
-![Summary Page](docs/screenshots/summary.png)
-
-> To add your screenshots:  
-> Place images in: `docs/screenshots/`  
-> Then replace the filenames above.
+> **Note**: Place your screenshot at `docs/screenshots/preview.png`.
 
 ---
 

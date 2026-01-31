@@ -16,7 +16,7 @@ namespace SmartTaxAssistant.Web.Controllers
         public IActionResult Index(int taxReturnId)
         {
             var items = _context.ExtractedLineItems
-                .Where(i => i.PdfDocument.TaxReturnId == taxReturnId)
+                .Where(i => i.PdfDocument != null && i.PdfDocument.TaxReturnId == taxReturnId)
                 .ToList();
 
             return View(items);

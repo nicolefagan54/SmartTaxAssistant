@@ -40,6 +40,12 @@ namespace SmartTaxAssistant.Web.Data
                 entity.Property(e => e.TotalTaxPaid).HasColumnType("decimal(18,2)");
                 entity.Property(e => e.EstimatedBalance).HasColumnType("decimal(18,2)");
             });
+            
+            // ExtractedLineItem Configuration
+            modelBuilder.Entity<ExtractedLineItem>(entity =>
+            {
+               entity.Property(e => e.Amount).HasColumnType("decimal(18,2)");
+            });
         }
     }
 }
